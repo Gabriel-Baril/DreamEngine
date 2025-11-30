@@ -2,9 +2,9 @@
 
 #include "pugixml/pugixml.hpp"
 
-#include "feature/xasset_parse.h"
-#include "prefab/xasset_parse.h"
-#include "buildconfig/xasset_parse.h"
+#include "xfeature/xasset_parse.h"
+#include "xprefab/xasset_parse.h"
+#include "xbuildconfig/xasset_parse.h"
 #include "symdb.h"
 
 namespace dm

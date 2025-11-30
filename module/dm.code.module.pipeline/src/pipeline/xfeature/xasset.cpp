@@ -20,7 +20,11 @@ namespace dm
 	i32 object_get_slug(const Signature<XFeatureAssetObject> &sig, char *buffer, u64 count)
 	{
 		const SymbolMetadata *meta = symdb_get_meta(sig.symbol);
-		DM_CORE_ASSERT(meta, "symbol not found");
+		if (!meta)
+		{
+			DM_ERROR_LOG("Symbol not found");
+			return core_snprintf(buffer, count, "[%zu, v%zu]", sig.symbol, XASSET_CODE_VERSION_FEATURE);
+		}
 
 		return core_snprintf(buffer, count, "[%s, v%zu]", meta->name, XASSET_CODE_VERSION_FEATURE);
 	}

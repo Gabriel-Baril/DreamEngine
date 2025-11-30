@@ -5,7 +5,7 @@
 #include "pipeline/cache.h"
 #include "pipeline/symdb.h"
 #include "pipeline/strdb.h"
-#include "pipeline/buildconfig/buildconfig.h"
+#include "pipeline/xbuildconfig/buildconfig.h"
 #include "pipeline/request.h"
 #include "pipeline/build/create.h"
 

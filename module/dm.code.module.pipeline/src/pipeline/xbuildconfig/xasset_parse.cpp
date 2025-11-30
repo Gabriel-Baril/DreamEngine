@@ -10,7 +10,7 @@
 #include "pipeline/xsrc.h"
 #include "pipeline/generated/buildconfig_generated.h"
 #include "pipeline/fbs_util.h"
-#include "pipeline/buildconfig/xasset.h"
+#include "pipeline/xbuildconfig/xasset.h"
 
 namespace dm
 {

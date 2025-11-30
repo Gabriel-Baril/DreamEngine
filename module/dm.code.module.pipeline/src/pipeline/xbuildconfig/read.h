@@ -5,7 +5,7 @@
 #if USING(DM_SYM_BUILDCONFIG)
 #include "core/core.h"
 #include "pipeline/generated/buildconfig_generated.h"
-#include "pipeline/buildconfig/xasset.h"
+#include "pipeline/xbuildconfig/xasset.h"
 #include "pipeline/request.h"
 #include "pipeline/request_read_xasset.h"
 

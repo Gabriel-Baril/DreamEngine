@@ -3,8 +3,8 @@
 #if USING(DM_DREAMLIKE_BUILD)
 #include "pipeline/cache.h"
 #include "pipeline/request_read_xasset.h"
-#include "pipeline/buildconfig/read.h"
-#include "pipeline/feature/read.h"
+#include "pipeline/xbuildconfig/read.h"
+#include "pipeline/xfeature/read.h"
 
 namespace dm
 {

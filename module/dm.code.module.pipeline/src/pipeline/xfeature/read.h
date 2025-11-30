@@ -5,7 +5,7 @@
 #if USING(DM_SYM_FEATURE)
 #include "core/core.h"
 
-#include "pipeline/feature/xasset.h"
+#include "pipeline/xfeature/xasset.h"
 #include "pipeline/request.h"
 #include "pipeline/request_read_xasset.h"
 
