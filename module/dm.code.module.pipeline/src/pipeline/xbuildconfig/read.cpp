@@ -1,43 +1,43 @@
 #include "read.h"
 
-#if USING(DM_SYM_BUILDCONFIG)
+#if USING(DM_SYM_XBUILDCONFIG)
 #include "pipeline/cache.h"
 
 namespace dm
 {
-	Response<BuildConfigReadRequest> request_handle(const Request<BuildConfigReadRequest> &req)
+	Response<XBuildConfigReadRequest> request_handle(const Request<XBuildConfigReadRequest> &req)
 	{
-		Response<BuildConfigReadRequest> res;
+		Response<XBuildConfigReadRequest> res;
 		res.data = object_get(req.sig);
 		return res;
 	}
 
-	const char *requet_get_type_name(const Request<BuildConfigReadRequest> &req)
+	const char *requet_get_type_name(const Request<XBuildConfigReadRequest> &req)
 	{
 		DM_MAYBE_UNUSED(req);
-		return DM_NAMEOF(BuildConfigReadRequest);
+		return DM_NAMEOF(XBuildConfigReadRequest);
 	}
 
-	bool request_valid(const Request<BuildConfigReadRequest> &req)
+	bool request_valid(const Request<XBuildConfigReadRequest> &req)
 	{
 		DM_MAYBE_UNUSED(req);
 		return true;
 	}
 
-	u64 request_get_id(const Request<BuildConfigReadRequest> &req)
+	u64 request_get_id(const Request<XBuildConfigReadRequest> &req)
 	{
 		HashBuilder hb;
-		hb.add_type<BuildConfigReadRequest>();
+		hb.add_type<XBuildConfigReadRequest>();
 		hb.add(object_get_id(req.sig));
 		return hb.get();
 	}
 
-	i32 request_get_slug(const Request<BuildConfigReadRequest> &req, char *buffer, u64 count)
+	i32 request_get_slug(const Request<XBuildConfigReadRequest> &req, char *buffer, u64 count)
 	{
 		return request_get_generic_xasset_slug(req, buffer, count);
 	}
 
-	ResponseStatus response_success(const Response<BuildConfigReadRequest> &res)
+	ResponseStatus response_success(const Response<XBuildConfigReadRequest> &res)
 	{
 		return res.data.valid() ? ResponseStatus::SUCCESS : ResponseStatus::FAILED;
 	}

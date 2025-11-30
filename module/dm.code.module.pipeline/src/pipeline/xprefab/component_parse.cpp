@@ -1,8 +1,8 @@
-#include "prefab_component_parse.h"
+#include "component_parse.h"
 
 #include "core/hash.h"
 
-#include "prefab_component.h"
+#include "component.h"
 
 namespace dm
 {

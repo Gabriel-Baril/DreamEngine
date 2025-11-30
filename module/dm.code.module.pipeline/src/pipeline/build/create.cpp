@@ -12,8 +12,8 @@ namespace dm
 	{
 		Response<DreamlikeBuildCreateRequest> res;
 
-		Request<BuildConfigReadRequest> buildconfigReq(req.builconfigSym);
-		Response<BuildConfigReadRequest> buildconfigRes = request_send(buildconfigReq);
+		Request<XBuildConfigReadRequest> buildconfigReq(req.builconfigSym);
+		Response<XBuildConfigReadRequest> buildconfigRes = request_send(buildconfigReq);
 
 		if (!buildconfigRes.data.valid())
 		{
@@ -37,8 +37,8 @@ namespace dm
 			}
 
 			sym_t featureSym = featureName;
-			Request<FeatureReadRequest> featureReq(featureSym);
-			Response<FeatureReadRequest> featureRes = request_send(featureReq);
+			Request<XFeatureReadRequest> featureReq(featureSym);
+			Response<XFeatureReadRequest> featureRes = request_send(featureReq);
 			if (featureRes.data.valid())
 			{
 				DM_INFO_LOG("Failed to find feature '{0}'", featureName);
@@ -51,7 +51,7 @@ namespace dm
 	const char *requet_get_type_name(const Request<DreamlikeBuildCreateRequest> &req)
 	{
 		DM_MAYBE_UNUSED(req);
-		return DM_NAMEOF(BuildConfigReadRequest);
+		return DM_NAMEOF(XBuildConfigReadRequest);
 	}
 
 	bool request_valid(const Request<DreamlikeBuildCreateRequest> &req)

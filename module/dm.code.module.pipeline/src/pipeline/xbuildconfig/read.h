@@ -2,7 +2,7 @@
 
 #include "core/core_define.h"
 
-#if USING(DM_SYM_BUILDCONFIG)
+#if USING(DM_SYM_XBUILDCONFIG)
 #include "core/core.h"
 #include "pipeline/generated/buildconfig_generated.h"
 #include "pipeline/xbuildconfig/xasset.h"
@@ -11,10 +11,10 @@
 
 namespace dm
 {
-	struct BuildConfigReadRequest;
+	struct XBuildConfigReadRequest;
 
 	template <>
-	struct Request<BuildConfigReadRequest>
+	struct Request<XBuildConfigReadRequest>
 	{
 		DEFINE_XASSET_READ_CONSTRUCTORS(XBuildConfigAssetObject);
 
@@ -22,18 +22,18 @@ namespace dm
 	};
 
 	template <>
-	struct Response<BuildConfigReadRequest>
+	struct Response<XBuildConfigReadRequest>
 	{
 		Handle<XBuildConfigAssetObject> data;
 	};
 
-	u64 request_get_id(const Request<BuildConfigReadRequest> &req);
-	i32 request_get_slug(const Request<BuildConfigReadRequest> &req, char *buffer, u64 count);
-	Response<BuildConfigReadRequest> request_handle(const Request<BuildConfigReadRequest> &req);
+	u64 request_get_id(const Request<XBuildConfigReadRequest> &req);
+	i32 request_get_slug(const Request<XBuildConfigReadRequest> &req, char *buffer, u64 count);
+	Response<XBuildConfigReadRequest> request_handle(const Request<XBuildConfigReadRequest> &req);
 
-	const char *requet_get_type_name(const Request<BuildConfigReadRequest> &req);
-	bool request_valid(const Request<BuildConfigReadRequest> &req);
+	const char *requet_get_type_name(const Request<XBuildConfigReadRequest> &req);
+	bool request_valid(const Request<XBuildConfigReadRequest> &req);
 
-	ResponseStatus response_success(const Response<BuildConfigReadRequest> &res);
+	ResponseStatus response_success(const Response<XBuildConfigReadRequest> &res);
 }
 #endif

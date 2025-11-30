@@ -5,7 +5,7 @@
 #include "pipeline/cache.h"
 #include "pipeline/symdb.h"
 #include "pipeline/strdb.h"
-#include "pipeline/xbuildconfig/buildconfig.h"
+#include "pipeline/xbuildconfig/xbuildconfig.h"
 #include "pipeline/request.h"
 #include "pipeline/build/create.h"
 
@@ -16,8 +16,8 @@ void test_request()
 	using namespace dm;
 
 	auto start = std::chrono::high_resolution_clock::now();
-	Request<BuildConfigReadRequest> buildconfigReq("dreamlike_pc.buildconfig");
-	Response<BuildConfigReadRequest> buildconfigRes = request_send(buildconfigReq);
+	Request<XBuildConfigReadRequest> buildconfigReq("dreamlike_pc.buildconfig");
+	Response<XBuildConfigReadRequest> buildconfigRes = request_send(buildconfigReq);
 	char buffer[512];
 	request_get_slug(buildconfigReq, buffer, 512);
 	DM_INFO_LOG("Request -> {0}", buffer);
@@ -43,8 +43,8 @@ void test_request_noprint()
 {
 	using namespace dm;
 	auto start = std::chrono::high_resolution_clock::now();
-	Request<BuildConfigReadRequest> buildconfigReq("dreamlike_pc.buildconfig");
-	Response<BuildConfigReadRequest> buildconfigRes = request_send(buildconfigReq);
+	Request<XBuildConfigReadRequest> buildconfigReq("dreamlike_pc.buildconfig");
+	Response<XBuildConfigReadRequest> buildconfigRes = request_send(buildconfigReq);
 	DM_INFO_LOG("Platform: {0}", static_cast<int>(buildconfigRes.data->platform()));
 	auto end = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);

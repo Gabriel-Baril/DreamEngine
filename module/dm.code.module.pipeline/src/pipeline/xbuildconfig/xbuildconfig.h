@@ -2,6 +2,6 @@
 
 #include "core/core_define.h"
 
-#if USING(DM_SYM_FEATURE)
+#if USING(DM_SYM_XBUILDCONFIG)
 #include "read.h"
 #endif

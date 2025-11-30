@@ -1,7 +1,7 @@
 #pragma once
 
 #include "pugixml/pugixml.hpp"
-
+#include "flatbuffers/base.h"
 #include "xml_util.h"
 
 namespace dm

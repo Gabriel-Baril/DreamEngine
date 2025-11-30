@@ -2,43 +2,43 @@
 
 #include "core/core_define.h"
 
-#if USING(DM_SYM_FEATURE)
+#if USING(DM_SYM_XFEATURE)
 #include "pipeline/cache.h"
 
 namespace dm
 {
-	Response<FeatureReadRequest> request_handle(const Request<FeatureReadRequest> &req)
+	Response<XFeatureReadRequest> request_handle(const Request<XFeatureReadRequest> &req)
 	{
-		Response<FeatureReadRequest> res;
+		Response<XFeatureReadRequest> res;
 		res.data = object_get(req.sig);
 		return res;
 	}
 
-	const char *requet_get_type_name(const Request<FeatureReadRequest> &req)
+	const char *requet_get_type_name(const Request<XFeatureReadRequest> &req)
 	{
 		DM_MAYBE_UNUSED(req);
-		return DM_NAMEOF(FeatureReadRequest);
+		return DM_NAMEOF(XFeatureReadRequest);
 	}
 
-	bool request_valid(const Request<FeatureReadRequest> &req)
+	bool request_valid(const Request<XFeatureReadRequest> &req)
 	{
 		return true;
 	}
 
-	u64 request_get_id(const Request<FeatureReadRequest> &req)
+	u64 request_get_id(const Request<XFeatureReadRequest> &req)
 	{
 		HashBuilder hb;
-		hb.add_type<FeatureReadRequest>();
+		hb.add_type<XFeatureReadRequest>();
 		hb.add(object_get_id(req.sig));
 		return hb.get();
 	}
 
-	i32 request_get_slug(const Request<FeatureReadRequest> &req, char *buffer, u64 count)
+	i32 request_get_slug(const Request<XFeatureReadRequest> &req, char *buffer, u64 count)
 	{
 		return request_get_generic_xasset_slug(req, buffer, count);
 	}
 
-	ResponseStatus response_success(const Response<FeatureReadRequest> &res)
+	ResponseStatus response_success(const Response<XFeatureReadRequest> &res)
 	{
 		return res.data.valid() ? ResponseStatus::SUCCESS : ResponseStatus::FAILED;
 	}

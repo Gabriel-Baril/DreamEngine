@@ -5,7 +5,7 @@
 #include "core/core.h"
 #include "core/core_filesystem.h"
 
-#include "prefab.h"
+#include "xprefab.h"
 #include "pipeline/xsrc.h"
 
 namespace dm

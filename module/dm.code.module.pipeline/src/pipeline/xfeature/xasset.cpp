@@ -2,7 +2,7 @@
 
 #include "core/core_define.h"
 
-#if USING(DM_SYM_FEATURE)
+#if USING(DM_SYM_XFEATURE)
 #include "pipeline/cache.h"
 #include "pipeline/xsrc_request.h"
 

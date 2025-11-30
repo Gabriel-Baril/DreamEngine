@@ -1,6 +1,6 @@
 #include "xasset_parse.h"
 
-#if USING(DM_SYM_BUILDCONFIG)
+#if USING(DM_SYM_XBUILDCONFIG)
 #include "pugixml/pugixml.hpp"
 
 #include "core/hash.h"
@@ -8,9 +8,8 @@
 
 #include "pipeline/symdb.h"
 #include "pipeline/xsrc.h"
-#include "pipeline/generated/buildconfig_generated.h"
-#include "pipeline/fbs_util.h"
 #include "pipeline/xbuildconfig/xasset.h"
+#include "pipeline/fbs_util.h"
 
 namespace dm
 {

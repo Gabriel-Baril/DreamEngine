@@ -5,8 +5,8 @@
 #include "core/hash.h"
 
 #include "pipeline/xsrc.h"
-#include "prefab_component.h"
-#include "prefab_component_parse.h"
+#include "component.h"
+#include "component_parse.h"
 
 namespace dm
 {

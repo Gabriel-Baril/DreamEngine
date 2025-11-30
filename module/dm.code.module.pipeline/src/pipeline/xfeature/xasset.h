@@ -2,7 +2,7 @@
 
 #include "core/core_define.h"
 
-#if USING(DM_SYM_FEATURE)
+#if USING(DM_SYM_XFEATURE)
 #include "pipeline/generated/feature_generated.h"
 #include "pipeline/object_get.h"
 #include "pipeline/symdb.h"

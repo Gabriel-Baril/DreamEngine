@@ -2,7 +2,7 @@
 
 #include "core/core_define.h"
 
-#if USING(DM_SYM_FEATURE)
+#if USING(DM_SYM_XFEATURE)
 #include "core/core.h"
 
 #include "pipeline/xfeature/xasset.h"
@@ -11,10 +11,10 @@
 
 namespace dm
 {
-	struct FeatureReadRequest;
+	struct XFeatureReadRequest;
 
 	template <>
-	struct Request<FeatureReadRequest>
+	struct Request<XFeatureReadRequest>
 	{
 		DEFINE_XASSET_READ_CONSTRUCTORS(XFeatureAssetObject);
 
@@ -22,16 +22,16 @@ namespace dm
 	};
 
 	template <>
-	struct Response<FeatureReadRequest>
+	struct Response<XFeatureReadRequest>
 	{
 		Handle<XFeatureAssetObject> data;
 	};
 
-	u64 request_get_id(const Request<FeatureReadRequest> &req);
-	i32 request_get_slug(const Request<FeatureReadRequest> &, char *buffer, u64 count);
-	Response<FeatureReadRequest> request_handle(const Request<FeatureReadRequest> &req);
-	const char *requet_get_type_name(const Request<FeatureReadRequest> &req);
-	bool request_valid(const Request<FeatureReadRequest> &req);
-	ResponseStatus response_success(const Response<FeatureReadRequest> &res);
+	u64 request_get_id(const Request<XFeatureReadRequest> &req);
+	i32 request_get_slug(const Request<XFeatureReadRequest> &, char *buffer, u64 count);
+	Response<XFeatureReadRequest> request_handle(const Request<XFeatureReadRequest> &req);
+	const char *requet_get_type_name(const Request<XFeatureReadRequest> &req);
+	bool request_valid(const Request<XFeatureReadRequest> &req);
+	ResponseStatus response_success(const Response<XFeatureReadRequest> &res);
 }
 #endif

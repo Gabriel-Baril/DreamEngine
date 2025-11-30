@@ -1,0 +1,10 @@
+include "core.fbs";
+
+namespace dm;
+
+table XZoneAsset {
+    id: ulong;
+    name: string;
+}
+
+root_type XZoneAsset;
