@@ -3,34 +3,16 @@
 #include "core/core_define.h"
 
 #if USING(DM_SYM_XBUILDCONFIG)
-#include "pipeline/object_get.h"
-#include "pipeline/symdb.h"
 #include "pipeline/generated/buildconfig_generated.h"
+#include "pipeline/xasset/util.h"
 
 namespace dm
 {
-	static constexpr u64 XASSET_CODE_VERSION_BUILDCONFIG = 1;
-
 	struct XBuildConfigAssetObject
 	{
+		static constexpr u64 VERSION = 1;
 		using Underlying = XBuildConfigAsset;
 	};
-
-	template <>
-	struct Signature<XBuildConfigAssetObject>
-	{
-		Signature(sym_t _symbol)
-				: symbol{_symbol}
-		{
-		}
-
-		sym_t symbol;
-	};
-
-	u64 object_get_id(const Signature<XBuildConfigAssetObject> &sig);
-	i32 object_get_slug(const Signature<XBuildConfigAssetObject> &sig, char *buffer, u64 count);
-	ObjectRequestResult object_request(const Signature<XBuildConfigAssetObject> &sig);
-	void object_request_failure(const Signature<XBuildConfigAssetObject> &sig, ObjectRequestResult result);
-	void object_load_failure(const Signature<XBuildConfigAssetObject> &sig);
+	XASSET_OBJECT_API(XBuildConfigAssetObject);
 }
 #endif

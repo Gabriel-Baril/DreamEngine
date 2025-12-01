@@ -1,6 +1,6 @@
 #include "xasset_parse.h"
 
-#if USING(DM_SYM_XZONE)
+#if USING(DM_SYM_XZONEALIAS)
 #include "pugixml/pugixml.hpp"
 
 #include "core/hash.h"
@@ -8,12 +8,12 @@
 
 #include "pipeline/symdb.h"
 #include "pipeline/xsrc.h"
-#include "pipeline/xzone/xasset.h"
+#include "pipeline/xzonealias/xasset.h"
 #include "pipeline/fbs_util.h"
 
 namespace dm
 {
-	static bool zone_parse(flatbuffers::FlatBufferBuilder &builder, const pugi::xml_node &node, const SourceContext &ctx)
+	static bool zonealias_parse(flatbuffers::FlatBufferBuilder &builder, const pugi::xml_node &node, const SourceContext &ctx)
 	{
 		// Name & id
 		const char *nameStr = get_xml_attr(node, "name");
@@ -33,7 +33,7 @@ namespace dm
 		info.totalPathDep = 1;
 		info.totalObjDep = 0;
 
-		Signature<XZoneAssetObject> sig(nameStr);
+		Signature<XZoneAliasAssetObject> sig(nameStr);
 		const u64 oId = object_get_id(sig);
 
 		bool ok = cache_obj_begin(oId, info);
@@ -48,10 +48,10 @@ namespace dm
 		return ok;
 	}
 
-	bool xasset_parse_zone(const pugi::xml_node &node, const SourceContext &ctx)
+	bool xasset_parse_zonealias(const pugi::xml_node &node, const SourceContext &ctx)
 	{
 		flatbuffers::FlatBufferBuilder builder(2048);
-		return zone_parse(builder, node, ctx);
+		return zonealias_parse(builder, node, ctx);
 	}
 }
 #endif

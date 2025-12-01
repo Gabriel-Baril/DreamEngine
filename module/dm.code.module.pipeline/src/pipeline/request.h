@@ -2,7 +2,6 @@
 
 namespace dm
 {
-
 	template <typename T>
 	struct Request
 	{

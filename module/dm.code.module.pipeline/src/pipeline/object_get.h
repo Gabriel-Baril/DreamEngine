@@ -99,22 +99,4 @@ namespace dm
 		const u64 objectId = object_get_id(sig);
 		return Handle<T>{objectId};
 	}
-
-	template <typename T>
-	void object_request_failure_generic(const Signature<T> &sig, ObjectRequestResult result)
-	{
-		DM_MAYBE_UNUSED(result);
-
-		char slug[512];
-		object_get_slug(sig, slug, DM_ARRLEN(slug));
-		DM_ERROR_LOG("Failed to request object '{0}'. Did you forget to store the result while requesting the object?", slug);
-	}
-
-	template <typename T>
-	void object_load_failure_generic(const Signature<T> &sig)
-	{
-		char slug[512];
-		object_get_slug(sig, slug, DM_ARRLEN(slug));
-		DM_ERROR_LOG("Failed to fetch object '{0}'", slug);
-	}
 }

@@ -4,33 +4,15 @@
 
 #if USING(DM_SYM_XFEATURE)
 #include "pipeline/generated/feature_generated.h"
-#include "pipeline/object_get.h"
-#include "pipeline/symdb.h"
+#include "pipeline/xasset/util.h"
 
 namespace dm
 {
-	static constexpr u64 XASSET_CODE_VERSION_FEATURE = 1; // Initial feature version
-
 	struct XFeatureAssetObject
 	{
+		static constexpr u64 VERSION = 1;
 		using Underlying = XFeatureAsset;
 	};
-
-	template <>
-	struct Signature<XFeatureAssetObject>
-	{
-		Signature(sym_t _symbol)
-			: symbol{ _symbol }
-		{
-		}
-
-		sym_t symbol;
-	};
-
-	u64 object_get_id(const Signature<XFeatureAssetObject> &sig);
-	i32 object_get_slug(const Signature<XFeatureAssetObject> &sig, char *buffer, u64 count);
-	ObjectRequestResult object_request(const Signature<XFeatureAssetObject> &sig);
-	void object_request_failure(const Signature<XFeatureAssetObject> &sig, ObjectRequestResult result);
-	void object_load_failure(const Signature<XFeatureAssetObject> &sig);
+	XASSET_OBJECT_API(XFeatureAssetObject);
 }
 #endif

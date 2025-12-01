@@ -68,14 +68,7 @@ namespace dm
 	bool xasset_parse_feature(const pugi::xml_node &node, const SourceContext &ctx)
 	{
 		flatbuffers::FlatBufferBuilder builder(2048);
-		feature_asset_parse(builder, node, ctx);
-
-		// TODO
-		// FeatureAssetSignature sig;
-		// sig.name = nameStr;
-		// object_store(sig, builder.GetBufferPointer(), builder.GetSize()); // cache_create_entry(id, builder.GetBufferPointer(), builder.GetSize(), true);
-
-		return false;
+		return feature_asset_parse(builder, node, ctx);
 	}
 }
 #endif
