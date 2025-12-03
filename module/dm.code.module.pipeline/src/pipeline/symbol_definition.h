@@ -2,6 +2,8 @@
 #error Must define SYMBOL_TYPE before including symbol_definition.h
 #endif // !SYMBOL_TYPE
 
+// #define SYMBOL_TYPE(symbolTypeEnum, symbolTypeString, parseFunc, assetParseFunc, enumdependFunc)
+
 SYMBOL_TYPE(SYMBOL_VERT_SHADER, "vert", nxsrc_agnostic_parse, nullptr, nullptr)
 SYMBOL_TYPE(SYMBOL_FRAG_SHADER, "frag", nxsrc_agnostic_parse, nullptr, nullptr)
 SYMBOL_TYPE(SYMBOL_FBX, "fbx", nxsrc_agnostic_parse, nullptr, nullptr)
