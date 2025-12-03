@@ -13,7 +13,6 @@ namespace dm
 		static constexpr u64 VERSION = 1;
 		using Underlying = XZoneAssetObject;
 	};
-
 	XASSET_OBJECT_API(XZoneAssetObject);
 }
 #endif

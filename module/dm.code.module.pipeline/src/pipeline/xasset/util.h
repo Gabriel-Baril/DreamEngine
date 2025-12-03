@@ -18,30 +18,31 @@ namespace dm
         Signature(sym_t _symbol) : symbol(_symbol) {}																									\
         sym_t symbol{};																																	\
     };																																					\
-    inline u64 object_get_id(const Signature<XAssetObjectType>& sig) { return xasset_object_signature_build_id(sig); }									\
-    inline i32 object_get_slug(const Signature<XAssetObjectType>& sig, char* buffer, u64 count) { return object_get_slug_generic(sig, buffer, count); }	\
-    inline ObjectRequestResult object_request(const Signature<XAssetObjectType>& sig) { return xsrc_object_request(sig.symbol, object_get_id(sig)); }  	\
-    inline void object_request_failure(const Signature<XAssetObjectType>& sig, ObjectRequestResult r){ object_request_failure_generic(sig, r); }       	\
-    inline void object_load_failure(const Signature<XAssetObjectType>& sig) { object_load_failure_generic(sig); }
+    DM_INLINE u64 object_get_id(const Signature<XAssetObjectType>& sig) { return xasset_object_signature_build_id(sig); }									\
+    DM_INLINE i32 object_get_slug(const Signature<XAssetObjectType>& sig, char* buffer, u64 count) { return object_get_slug_generic(sig, buffer, count); }	\
+    DM_INLINE ObjectRequestResult object_request(const Signature<XAssetObjectType>& sig) { return xsrc_object_request(sig.symbol, object_get_id(sig)); }  	\
+    DM_INLINE void object_request_failure(const Signature<XAssetObjectType>& sig, ObjectRequestResult r){ object_request_failure_generic(sig, r); }       	\
+    DM_INLINE void object_load_failure(const Signature<XAssetObjectType>& sig) { object_load_failure_generic(sig); }
 
 #define XASSET_READ_API(XAssetObjectType)																															\
 	template <>																																						\
 	struct Request<XAssetObjectType>																																\
 	{																																								\
-		Request(sym_t sym) : sig{ make_signature<typename XAssetObjectType::UnderlyingObject>(sym) } {}																\
-		Signature<typename XAssetObjectType::UnderlyingObject> sig;																									\
+		Request() = default;																																		\
+		void set_symbol(sym_t sym) { sig = make_signature<typename XAssetObjectType::UnderlyingObject>(sym); }												\
+		Signature<typename XAssetObjectType::UnderlyingObject> sig{};																								\
 	};																																								\
 	template <>																																						\
 	struct Response<XAssetObjectType>																																\
 	{																																								\
 		Handle<typename XAssetObjectType::UnderlyingObject> data;																									\
 	};																																								\
-	inline Response<XAssetObjectType> request_handle(const Request<XAssetObjectType>& req) { return xasset_read_request_handle_generic<XAssetObjectType>(req); }	\
-	inline const char* requet_get_type_name(const Request<XAssetObjectType>& req) { DM_MAYBE_UNUSED(req); return DM_NAMEOF(XAssetObjectType); }						\
-	inline bool request_valid(const Request<XAssetObjectType>& req) { DM_MAYBE_UNUSED(req); return true; }															\
-	inline u64 request_get_id(const Request<XAssetObjectType>& req) { return xasset_read_request_build_id(req); }													\
-	inline i32 request_get_slug(const Request<XAssetObjectType>& req, char* buffer, u64 count) { return request_get_generic_xasset_slug(req, buffer, count); }		\
-	inline ResponseStatus response_success(const Response<XAssetObjectType>& res) { return res.data.valid() ? ResponseStatus::SUCCESS : ResponseStatus::FAILED; }
+	DM_INLINE void request_handle(const Request<XAssetObjectType>& req, Response<XAssetObjectType>& res) { res = xasset_read_request_handle_generic<XAssetObjectType>(req); }	\
+	DM_INLINE const char* requet_get_type_name(const Request<XAssetObjectType>& req) { DM_MAYBE_UNUSED(req); return DM_NAMEOF(XAssetObjectType); }						\
+	DM_INLINE bool request_valid(const Request<XAssetObjectType>& req) { DM_MAYBE_UNUSED(req); return true; }															\
+	DM_INLINE u64 request_get_id(const Request<XAssetObjectType>& req) { return xasset_read_request_build_id(req); }													\
+	DM_INLINE i32 request_get_slug(const Request<XAssetObjectType>& req, char* buffer, u64 count) { return request_get_generic_xasset_slug(req, buffer, count); }		\
+	DM_INLINE ResponseStatus response_success(const Response<XAssetObjectType>& res) { return res.data.valid() ? ResponseStatus::SUCCESS : ResponseStatus::FAILED; }
 
 
 	template <typename T>

@@ -32,6 +32,8 @@
 #define DM_RETAIL NOT_IN_USE
 #endif
 
+#define DM_INLINE inline
+
 #define DM_PLATFORM_WINDOWS NOT_IN_USE
 #define DM_PLATFORM_IOS NOT_IN_USE
 #define DM_PLATFORM_MACOS NOT_IN_USE

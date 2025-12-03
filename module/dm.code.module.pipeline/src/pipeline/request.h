@@ -19,16 +19,9 @@ namespace dm
 	};
 
 	template <typename T>
-	Response<T> request_send(const Request<T> &req)
+	void request_send(const Request<T>& req, Response<T>& res)
 	{
-		return request_handle(req);
-	}
-
-	template <typename T, typename... Args>
-	Response<T> request_send(Args &&...args)
-	{
-		Request<T> req(std::forward<Args>(args)...);
-		return request_send(req);
+		request_handle(req, res);
 	}
 
 	// TODO: request_send_async

@@ -24,6 +24,7 @@ public class DmCodeModulePipelineProject : BaseCppProject
         conf.Defines.Add("_CRT_SECURE_NO_WARNINGS");
 
         conf.AddPublicDependency<DmCodeModuleCoreProject>(target);
+        conf.AddPublicDependency<DmCodeModuleSharedProject>(target);
         conf.AddPublicDependency<DmCodeExternalPugiXMLProject>(target);
         conf.AddPublicDependency<DmCodeExternalFlecsProject>(target);
         conf.AddPublicDependency<DmCodeExternalFlatbuffersProject>(target);

@@ -10,16 +10,17 @@
 namespace dm
 {
 	using SymbolParseCallback = bool (*)(const pugi::xml_node &symbolNode, const SourceContext &ctx);
-	static constexpr SymbolParseCallback s_XSymbolParseCallbacks[underlying(ESymbolType::count)] = {
+	static constexpr SymbolParseCallback s_XSymbolParseCallbacks[underlying(ESymbolType::COUNT)] = {
 			nullptr,
 			nullptr,
 			nullptr,
 			nullptr,
-			nullptr,									// stringtable
-			nullptr,									// text
-			xasset_parse_prefab,			// prefab
-			xasset_parse_buildconfig, // buildconfig
-			xasset_parse_feature};
+			nullptr,
+			nullptr,
+			xasset_parse_prefab,
+			xasset_parse_buildconfig,
+			xasset_parse_feature
+	};
 
 	static bool xsym_agnostic_parse(ESymbolType type, const pugi::xml_node &symbolNode, const SourceContext &ctx)
 	{
@@ -63,7 +64,7 @@ namespace dm
 					DM_INFO_LOG("xsymbol ({0}) '{1}' ({2}) registered", symdb_sym_to_str(type), symbolName, static_cast<u64>(symbol));
 				}
 			}
-			else if (type != ESymbolType::unknown)
+			else if (type != ESymbolType::UNKNOWN)
 			{
 				DM_WARNING_LOG("Symbols of type '{0}' detected in xsymbol, only xsymbol types can be declared within an xsymbol", symdb_sym_to_str(type));
 			}

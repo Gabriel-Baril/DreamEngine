@@ -10,25 +10,29 @@ namespace dm
 	// The symbol types supported by the pipeline
 	enum class ESymbolType
 	{
-		vert_shader,
-		frag_shader,
-		fbx, // fbx 3d model source
-		obj, // obj 3d model source
+#define SYMBOL_TYPE(symbolTypeEnum, symbolTypeString, parseFunc, assetParseFunc, enumdependFunc) symbolTypeEnum,
+#include "pipeline/symbol_definition.h"
+#undef SYMBOL_TYPE
 
-		stringtable,
-		text,
-		prefab, // Format for structuring entities (xml-like)
-		buildconfig,
-		feature,
-		count,
-
-		nxsymbol_begin = vert_shader, // non xsymbol
-		nxsymbol_end = obj,
-		xsymbol_begin = stringtable, // engine-specific xml-like symbol
-		xsymbol_end = feature,
-
-		unknown
+		COUNT,
+		NXSYMBOL_BEGIN = SYMBOL_VERT_SHADER, // non xsymbol
+		NXSYMBOL_END = SYMBOL_OBJ,
+		XSYMBOL_BEGIN = SYMBOL_STRINGTABLE, // engine-specific xml-like symbol
+		XSYMBOL_END = SYMBOL_FEATURE,
+		UNKNOWN
 	};
+
+	static_assert(
+		underlying(ESymbolType::COUNT) ==
+		[]() {
+			int count = 0;
+#define SYMBOL_TYPE(...) ++count;
+#include "pipeline/symbol_definition.h"
+#undef SYMBOL_TYPE
+			return count;
+		}(),
+		"ESymbolType::COUNT does not match number of entries in symbol_definition.h"
+	);
 
 	struct SymbolMetadata
 	{
@@ -50,5 +54,6 @@ namespace dm
 	void symdb_explore_sources(const fspath &path);
 
 	const SymbolMetadata *symdb_get_meta(sym_t symbol);
+	ESymbolType symdb_get_type(sym_t symbol);
 	void symdb_register(sym_t symbol, const char *name, ESymbolType type, const fspath &path);
 }

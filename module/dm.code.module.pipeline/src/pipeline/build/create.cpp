@@ -8,24 +8,24 @@
 
 namespace dm
 {
-	Response<DreamlikeBuildCreateRequest> request_handle(const Request<DreamlikeBuildCreateRequest> &req)
+	void request_handle(const Request<DreamlikeBuildCreateRequest> &req, Response<DreamlikeBuildCreateRequest>& res)
 	{
-		Response<DreamlikeBuildCreateRequest> res;
-
-		Request<XBuildConfigReadRequest> buildconfigReq(req.builconfigSym);
-		Response<XBuildConfigReadRequest> buildconfigRes = request_send(buildconfigReq);
+		Request<XBuildConfigReadRequest> buildconfigReq;
+		buildconfigReq.set_symbol(req.builconfigSym);
+		Response<XBuildConfigReadRequest> buildconfigRes;
+		request_send(buildconfigReq, buildconfigRes);
 
 		if (!buildconfigRes.data.valid())
 		{
-			res.buildStatus = BuildStatus::FAILED;
-			return res;
+			res.set_build_status(BuildStatus::FAILED);
+			return;
 		}
 
 		const auto* vec = buildconfigRes.data->features();
 		if (!vec)
 		{
-			res.buildStatus = BuildStatus::FAILED;
-			return res;
+			res.set_build_status(BuildStatus::FAILED);
+			return;
 		}
 
 		for (flatbuffers::uoffset_t i = 0; i < vec->size(); ++i)
@@ -37,16 +37,19 @@ namespace dm
 			}
 
 			sym_t featureSym = featureName;
-			Request<XFeatureReadRequest> featureReq(featureSym);
-			Response<XFeatureReadRequest> featureRes = request_send(featureReq);
+			Request<XFeatureReadRequest> featureReq;
+			featureReq.set_symbol(featureSym);
+			Response<XFeatureReadRequest> featureRes;
+			request_send(featureReq, featureRes);
+
 			if (featureRes.data.valid())
 			{
 				DM_INFO_LOG("Failed to find feature '{0}'", featureName);
 				continue;
 			}
 		}
-
-	}
+		res.set_build_status(BuildStatus::SUCCESS);
+	}									   
 
 	const char *requet_get_type_name(const Request<DreamlikeBuildCreateRequest> &req)
 	{

@@ -16,27 +16,16 @@ namespace dm
 
 	static SymDBGlob s_SymDBGlob{};
 
-	static constexpr const char *s_SymTypeStr[underlying(ESymbolType::count)] = {
-			"vert",
-			"frag",
-			"fbx",
-			"obj",
-			"stringtable",
-			"text",
-			"prefab",
-			"buildconfig",
-			"feature"};
+	static constexpr const char *s_SymTypeStr[underlying(ESymbolType::COUNT)] = {
+#define SYMBOL_TYPE(symbolTypeEnum, symbolTypeString, parseFunc, assetParseFunc, enumdependFunc) symbolTypeString,
+#include "pipeline/symbol_definition.h"
+#undef SYMBOL_TYPE
+	};
 
-	static constexpr SourceParseCallback s_SourceParseCallbacks[underlying(ESymbolType::count)] = {
-			nxsrc_agnostic_parse,
-			nxsrc_agnostic_parse,
-			nxsrc_agnostic_parse,
-			nxsrc_agnostic_parse,
-			xsrc_agnostic_parse,
-			xsrc_agnostic_parse,
-			xsrc_agnostic_parse,
-			xsrc_agnostic_parse,
-			xsrc_agnostic_parse,
+	static constexpr SourceParseCallback s_SourceParseCallbacks[underlying(ESymbolType::COUNT)] = {
+#define SYMBOL_TYPE(symbolTypeEnum, symbolTypeString, parseFunc, assetParseFunc, enumdependFunc) parseFunc,
+#include "pipeline/symbol_definition.h"
+#undef SYMBOL_TYPE
 	};
 
 	static void explore_source(const fspath &path)
@@ -44,7 +33,7 @@ namespace dm
 		if (!filesystem_is_directory(path))
 		{
 			ESymbolType type = symdb_get_source_file_type(path);
-			if (type != ESymbolType::unknown)
+			if (type != ESymbolType::UNKNOWN)
 			{
 				DM_TRACE_LOG("Source '{0}'", path.string().c_str());
 				SourceParseCallback parseCallback = symdb_get_parse_callback(type);
@@ -67,14 +56,14 @@ namespace dm
 		str_copy(lowerCaseBuffer, type);
 		str_to_lowercase(lowerCaseBuffer, strlen(lowerCaseBuffer));
 
-		for (int i = 0; i < underlying(ESymbolType::count); i++)
+		for (int i = 0; i < underlying(ESymbolType::COUNT); i++)
 		{
 			if (str_equals(lowerCaseBuffer, s_SymTypeStr[i]))
 			{
 				return static_cast<ESymbolType>(i);
 			}
 		}
-		return ESymbolType::unknown;
+		return ESymbolType::UNKNOWN;
 	}
 
 	SourceParseCallback symdb_get_parse_callback(ESymbolType type)
@@ -84,17 +73,17 @@ namespace dm
 
 	bool symdb_is_xsymbol(ESymbolType type)
 	{
-		return type >= ESymbolType::xsymbol_begin && type <= ESymbolType::xsymbol_end;
+		return type >= ESymbolType::XSYMBOL_BEGIN && type <= ESymbolType::XSYMBOL_END;
 	}
 
 	bool symdb_is_nxsymbol(ESymbolType type)
 	{
-		return type >= ESymbolType::nxsymbol_begin && type <= ESymbolType::nxsymbol_end;
+		return type >= ESymbolType::NXSYMBOL_BEGIN && type <= ESymbolType::NXSYMBOL_END;
 	}
 
 	ESymbolType symdb_get_source_file_type(const fspath &path)
 	{
-		for (int i = 0; i < underlying(ESymbolType::count); i++)
+		for (int i = 0; i < underlying(ESymbolType::COUNT); i++)
 		{
 			char extBuffer[SYMBOL_TYPE_MAX_LENGTH + 1];
 			sprintf(extBuffer, ".%s", s_SymTypeStr[i]);
@@ -103,7 +92,7 @@ namespace dm
 				return static_cast<ESymbolType>(i);
 			}
 		}
-		return ESymbolType::unknown;
+		return ESymbolType::UNKNOWN;
 	}
 
 	void symdb_explore_sources(const fspath &path)
@@ -118,6 +107,16 @@ namespace dm
 			return &s_SymDBGlob.symmap[symbol];
 		}
 		return nullptr;
+	}
+
+	ESymbolType symdb_get_type(sym_t symbol)
+	{
+		const SymbolMetadata *meta = symdb_get_meta(symbol);
+		if (meta)
+		{
+			return meta->type;
+		}
+		return ESymbolType::UNKNOWN;
 	}
 
 	void symdb_register(sym_t symbol, const char *name, ESymbolType type, const fspath &path)
