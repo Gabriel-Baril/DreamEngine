@@ -17,13 +17,13 @@ namespace dm
 		FAILED
 	};
 
-	struct DreamlikeBuildCreateRequest
+	struct BuildCreateTask
 	{
 		static constexpr u64 VERSION = 1;
 	};
 
 	template <>
-	struct Request<DreamlikeBuildCreateRequest>
+	struct Request<BuildCreateTask>
 	{
 		Request() = default;
 
@@ -33,7 +33,7 @@ namespace dm
 	};
 
 	template <>
-	struct Response<DreamlikeBuildCreateRequest>
+	struct Response<BuildCreateTask>
 	{
 		DM_INLINE BuildStatus get_build_status() const { return buildStatus; }
 		DM_INLINE void set_build_status(BuildStatus status) { buildStatus = status; }
@@ -41,11 +41,11 @@ namespace dm
 		BuildStatus buildStatus = BuildStatus::UNKNOWN;
 	};
 
-	u64 request_get_id(const Request<DreamlikeBuildCreateRequest> &req);
-	i32 request_get_slug(const Request<DreamlikeBuildCreateRequest> &req, char *buffer, u64 count);
-	void request_handle(const Request<DreamlikeBuildCreateRequest> &req, Response<DreamlikeBuildCreateRequest>& response);
-	const char *requet_get_type_name(const Request<DreamlikeBuildCreateRequest> &req);
-	bool request_valid(const Request<DreamlikeBuildCreateRequest> &req);
-	ResponseStatus response_success(const Response<DreamlikeBuildCreateRequest> &res);
+	u64 request_get_id(const Request<BuildCreateTask> &req);
+	i32 request_get_slug(const Request<BuildCreateTask> &req, char *buffer, u64 count);
+	void request_handle(const Request<BuildCreateTask> &req, Response<BuildCreateTask>& response);
+	const char *requet_get_type_name(const Request<BuildCreateTask> &req);
+	bool request_valid(const Request<BuildCreateTask> &req);
+	ResponseStatus response_success(const Response<BuildCreateTask> &res);
 }
 #endif

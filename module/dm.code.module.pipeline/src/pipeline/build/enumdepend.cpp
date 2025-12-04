@@ -7,7 +7,7 @@
 
 namespace dm
 {
-	using EnumdependCallback = bool (*)(sym_t sym, Response<XEnumDependRequest>& res);
+	using EnumdependCallback = bool (*)(sym_t sym, Response<XEnumDependTask>& res);
 	static constexpr EnumdependCallback s_EnumdependCallbacks[underlying(ESymbolType::COUNT)] =
 	{
 #define SYMBOL_TYPE(symbolTypeEnum, symbolTypeString, parseFunc, assetParseFunc, enumdependFunc) enumdependFunc,
@@ -15,7 +15,7 @@ namespace dm
 #undef SYMBOL_TYPE
 	};
 
-	void request_handle(const Request<XEnumDependRequest>& req, Response<XEnumDependRequest>& res)
+	void request_handle(const Request<XEnumDependTask>& req, Response<XEnumDependTask>& res)
 	{
 		DM_CORE_ASSERT(req.symbols, "Symbol cannot be null");
 		for (int i = 0; i < req.get_symbol_count(); i++)
@@ -33,21 +33,21 @@ namespace dm
 		}
 	}
 
-	const char* requet_get_type_name(const Request<XEnumDependRequest>& req)
+	const char* requet_get_type_name(const Request<XEnumDependTask>& req)
 	{
 		DM_MAYBE_UNUSED(req);
-		return DM_NAMEOF(XEnumDependRequest);
+		return DM_NAMEOF(XEnumDependTask);
 	}
 
-	bool request_valid(const Request<XEnumDependRequest>& req)
+	bool request_valid(const Request<XEnumDependTask>& req)
 	{
 		return req.symbols != nullptr;
 	}
 
-	u64 request_get_id(const Request<XEnumDependRequest>& req)
+	u64 request_get_id(const Request<XEnumDependTask>& req)
 	{
 		HashBuilder hb;
-		hb.add_type<XEnumDependRequest>();
+		hb.add_type<XEnumDependTask>();
 		// TODO: In theory we should sort the symbols to get a consistent hash regardless of order
 		for (int i = 0; i < req.get_symbol_count(); i++)
 		{
@@ -56,7 +56,7 @@ namespace dm
 		return hb.get();
 	}
 
-	i32 request_get_slug(const Request<XEnumDependRequest>& req, char* buffer, u64 count)
+	i32 request_get_slug(const Request<XEnumDependTask>& req, char* buffer, u64 count)
 	{
 		DM_MAYBE_UNUSED(req);
 		DM_MAYBE_UNUSED(buffer);
@@ -65,7 +65,7 @@ namespace dm
 		return 0;
 	}
 
-	ResponseStatus response_success(const Response<XEnumDependRequest>& res)
+	ResponseStatus response_success(const Response<XEnumDependTask>& res)
 	{
 		return ResponseStatus::SUCCESS;
 	}

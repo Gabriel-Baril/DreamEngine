@@ -8,11 +8,11 @@
 
 namespace dm
 {
-	struct XBuildConfigReadRequest
+	struct XBuildConfigReadTask
 	{
 		static constexpr u64 VERSION = 1;
 		using UnderlyingObject = XBuildConfigAssetObject;
 	};
-	XASSET_READ_API(XBuildConfigReadRequest);
+	XASSET_READ_API(XBuildConfigReadTask);
 }
 #endif

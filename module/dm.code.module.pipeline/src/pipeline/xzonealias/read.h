@@ -8,11 +8,11 @@
 
 namespace dm
 {
-	struct XZoneReadAliasRequest
+	struct XZoneAliasReadTask
 	{
 		static constexpr u64 VERSION = 1;
 		using UnderlyingObject = XZoneAliasAssetObject;
 	};
-	XASSET_OBJECT_API(XZoneReadAliasRequest);
+	XASSET_OBJECT_API(XZoneAliasReadTask);
 }
 #endif

@@ -4,5 +4,5 @@
 
 namespace dm
 {
-	bool enumdepend_xbuildconfig(sym_t symbol, Response<XEnumDependRequest>& res);
+	bool enumdepend_xbuildconfig(sym_t symbol, Response<XEnumDependTask>& res);
 }

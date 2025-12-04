@@ -16,9 +16,9 @@ void test_request()
 	using namespace dm;
 
 	auto start = std::chrono::high_resolution_clock::now();
-	Request<XBuildConfigReadRequest> req;
+	Request<XBuildConfigReadTask> req;
 	req.set_symbol("dreamlike_pc.buildconfig");
-	Response<XBuildConfigReadRequest> res;
+	Response<XBuildConfigReadTask> res;
 	request_send(req, res);
 
 	char buffer[512];
@@ -46,9 +46,9 @@ void test_request_noprint()
 {
 	using namespace dm;
 	auto start = std::chrono::high_resolution_clock::now();
-	Request<XBuildConfigReadRequest> req;
+	Request<XBuildConfigReadTask> req;
 	req.set_symbol("dreamlike_pc.buildconfig");
-	Response<XBuildConfigReadRequest> res;
+	Response<XBuildConfigReadTask> res;
 	request_send(req, res);
 
 	DM_INFO_LOG("Platform: {0}", static_cast<int>(res.data->platform()));
@@ -61,9 +61,9 @@ void dreamlike_build_request()
 {
 	using namespace dm;
 	auto start = std::chrono::high_resolution_clock::now();
-	Request<DreamlikeBuildCreateRequest> req{};
+	Request<BuildCreateTask> req{};
 	req.set_buildconfig("dreamlike_pc.buildconfig");
-	Response<DreamlikeBuildCreateRequest> res;
+	Response<BuildCreateTask> res;
 	request_send(req, res);
 
 	DM_INFO_LOG("Success: {0}", static_cast<int>(res.buildStatus));

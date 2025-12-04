@@ -8,13 +8,13 @@
 
 namespace dm
 {
-	struct XEnumDependRequest
+	struct XEnumDependTask
 	{
 		static constexpr u64 VERSION = 1;
 	};
 	
 	template <>
-	struct Request<XEnumDependRequest>
+	struct Request<XEnumDependTask>
 	{
 		Request() = default;
 
@@ -31,16 +31,16 @@ namespace dm
 	};
 
 	template <>
-	struct Response<XEnumDependRequest>
+	struct Response<XEnumDependTask>
 	{
 
 	};
 
-	u64 request_get_id(const Request<XEnumDependRequest>& req);
-	i32 request_get_slug(const Request<XEnumDependRequest>& req, char* buffer, u64 count);
-	void request_handle(const Request<XEnumDependRequest>& req, Response<XEnumDependRequest>& response);
-	const char* requet_get_type_name(const Request<XEnumDependRequest>& req);
-	bool request_valid(const Request<XEnumDependRequest>& req);
-	ResponseStatus response_success(const Response<XEnumDependRequest>& res);
+	u64 request_get_id(const Request<XEnumDependTask>& req);
+	i32 request_get_slug(const Request<XEnumDependTask>& req, char* buffer, u64 count);
+	void request_handle(const Request<XEnumDependTask>& req, Response<XEnumDependTask>& response);
+	const char* requet_get_type_name(const Request<XEnumDependTask>& req);
+	bool request_valid(const Request<XEnumDependTask>& req);
+	ResponseStatus response_success(const Response<XEnumDependTask>& res);
 }
 #endif

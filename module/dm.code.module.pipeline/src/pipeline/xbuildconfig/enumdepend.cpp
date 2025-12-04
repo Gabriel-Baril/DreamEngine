@@ -3,11 +3,11 @@
 
 namespace dm
 {
-	bool enumdepend_xbuildconfig(sym_t symbol, Response<XEnumDependRequest>& res)
+	bool enumdepend_xbuildconfig(sym_t symbol, Response<XEnumDependTask>& res)
 	{
-		Request<XBuildConfigReadRequest> buildconfigReq;
+		Request<XBuildConfigReadTask> buildconfigReq;
 		buildconfigReq.set_symbol(symbol);
-		Response<XBuildConfigReadRequest> buildconfigRes;
+		Response<XBuildConfigReadTask> buildconfigRes;
 		request_send(buildconfigReq, buildconfigRes);
 
 		if (!buildconfigRes.data.valid())
