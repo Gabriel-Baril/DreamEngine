@@ -39,7 +39,7 @@ namespace dm
 	u64 request_get_id(const Request<XEnumDependTask>& req);
 	i32 request_get_slug(const Request<XEnumDependTask>& req, char* buffer, u64 count);
 	void request_handle(const Request<XEnumDependTask>& req, Response<XEnumDependTask>& response);
-	const char* requet_get_type_name(const Request<XEnumDependTask>& req);
+	const char* request_get_type_name(const Request<XEnumDependTask>& req);
 	bool request_valid(const Request<XEnumDependTask>& req);
 	ResponseStatus response_success(const Response<XEnumDependTask>& res);
 }

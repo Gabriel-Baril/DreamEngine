@@ -33,7 +33,7 @@ namespace dm
 		}
 	}
 
-	const char* requet_get_type_name(const Request<XEnumDependTask>& req)
+	const char* request_get_type_name(const Request<XEnumDependTask>& req)
 	{
 		DM_MAYBE_UNUSED(req);
 		return DM_NAMEOF(XEnumDependTask);

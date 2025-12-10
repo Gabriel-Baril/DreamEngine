@@ -48,7 +48,7 @@ namespace dm
 		for (const pugi::xml_node &symbolNode : symbolsNode.children())
 		{
 			const pugi::char_t *symbolType = symbolNode.name();
-			ESymbolType type = symdb_str_to_sym(symbolType);
+			ESymbolType type = symdb_str_to_sym_type(symbolType);
 			if (symdb_is_xsymbol(type))
 			{
 				const pugi::char_t *symbolName = symbolNode.attribute("name").as_string(); // Every xsymbol node has a name

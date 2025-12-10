@@ -50,7 +50,7 @@ namespace dm
 		return s_SymTypeStr[underlying(type)];
 	}
 
-	ESymbolType symdb_str_to_sym(const char *type)
+	ESymbolType symdb_str_to_sym_type(const char *type)
 	{
 		char lowerCaseBuffer[SYMBOL_TYPE_MAX_LENGTH];
 		str_copy(lowerCaseBuffer, type);
@@ -64,6 +64,16 @@ namespace dm
 			}
 		}
 		return ESymbolType::UNKNOWN;
+	}
+
+	ESymbolType symdb_sym_type_from_sym_name(const char* symName)
+	{
+		const char* dotPosition = str_find_first_of(symName, '.');
+		if (dotPosition == nullptr)
+		{
+			return ESymbolType::UNKNOWN;
+		}
+		return symdb_str_to_sym_type(dotPosition + 1);
 	}
 
 	SourceParseCallback symdb_get_parse_callback(ESymbolType type)

@@ -13,6 +13,6 @@ namespace dm
 		static constexpr u64 VERSION = 1;
 		using Underlying = XFeatureAsset;
 	};
-	XASSET_OBJECT_API(XFeatureAssetObject);
+	XASSET_OBJECT_API(XFeatureAssetObject)
 }
 #endif

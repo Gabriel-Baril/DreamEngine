@@ -32,35 +32,38 @@ enum CAssetType : uint32_t {
   CAssetType_prefab = 2,
   CAssetType_variant = 3,
   CAssetType_zonealias = 4,
+  CAssetType_unknown = 5,
   CAssetType_MIN = CAssetType_buildconfig,
-  CAssetType_MAX = CAssetType_zonealias
+  CAssetType_MAX = CAssetType_unknown
 };
 
-inline const CAssetType (&EnumValuesCAssetType())[5] {
+inline const CAssetType (&EnumValuesCAssetType())[6] {
   static const CAssetType values[] = {
     CAssetType_buildconfig,
     CAssetType_feature,
     CAssetType_prefab,
     CAssetType_variant,
-    CAssetType_zonealias
+    CAssetType_zonealias,
+    CAssetType_unknown
   };
   return values;
 }
 
 inline const char * const *EnumNamesCAssetType() {
-  static const char * const names[6] = {
+  static const char * const names[7] = {
     "buildconfig",
     "feature",
     "prefab",
     "variant",
     "zonealias",
+    "unknown",
     nullptr
   };
   return names;
 }
 
 inline const char *EnumNameCAssetType(CAssetType e) {
-  if (::flatbuffers::IsOutRange(e, CAssetType_buildconfig, CAssetType_zonealias)) return "";
+  if (::flatbuffers::IsOutRange(e, CAssetType_buildconfig, CAssetType_unknown)) return "";
   const size_t index = static_cast<size_t>(e);
   return EnumNamesCAssetType()[index];
 }

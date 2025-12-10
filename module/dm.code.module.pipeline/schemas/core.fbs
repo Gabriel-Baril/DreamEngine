@@ -32,5 +32,7 @@ enum CAssetType: uint {
     feature,
     prefab,
     variant,
-    zonealias
+    zonealias,
+
+		unknown
 }

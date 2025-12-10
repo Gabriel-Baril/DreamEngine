@@ -44,7 +44,8 @@ namespace dm
 	using SourceParseCallback = bool (*)(const fspath &path);
 
 	const char *symdb_sym_to_str(ESymbolType type);
-	ESymbolType symdb_str_to_sym(const char *type);
+	ESymbolType symdb_str_to_sym_type(const char* type);
+	ESymbolType symdb_sym_type_from_sym_name(const char* symName);
 
 	SourceParseCallback symdb_get_parse_callback(ESymbolType type);
 

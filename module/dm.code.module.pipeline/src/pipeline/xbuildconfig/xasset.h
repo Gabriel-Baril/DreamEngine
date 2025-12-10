@@ -13,6 +13,6 @@ namespace dm
 		static constexpr u64 VERSION = 1;
 		using Underlying = XBuildConfigAsset;
 	};
-	XASSET_OBJECT_API(XBuildConfigAssetObject);
+	XASSET_OBJECT_API(XBuildConfigAssetObject)
 }
 #endif
